@@ -6,6 +6,8 @@ var Database = require('./lib/database');
 var assert = require('assert');
 
 // Constants
+const opentelemetry = require('@opentelemetry/api');
+const tracer = opentelemetry.trace.getTracer('pacman-tracer');
 
 // Routes
 var highscores = require('./routes/highscores');
