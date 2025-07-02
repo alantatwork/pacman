@@ -1,6 +1,7 @@
 FROM node:jod
 
-MAINTAINER Ivan Font <ifont@redhat.com>
+#MAINTAINER Ivan Font <ifont@redhat.com>
+LABEL org.opencontainers.image.authors="ifont@redhat.com"
 
 # Create app directory
 RUN mkdir -p /usr/src/app
@@ -11,7 +12,7 @@ RUN git clone https://github.com/alantatwork/pacman.git .
 
 # Install app dependencies
 RUN npm install
-RUN npm install --save @splunk/otel
+RUN npm install --save @splunk/otel@2.14.0
 RUN npm install --save @opentelemetry/api
 RUN npm install --save @splunk/otel-web
 RUN npm install --save @splunk/otel-web-session-recorder
