@@ -19,7 +19,7 @@ RUN npm install --save @splunk/otel-web-session-recorder
 
 
 # Set appropriate permissions
-RUN chmod -R go+r /usr/src/app/node_modules/@splunk/otel@2.14.0
+RUN chmod -R go+r /usr/src/app/node_modules/@splunk/otel
 RUN chmod -R go+r /usr/src/app/node_modules/@opentelemetry/api
 RUN chmod -R go+r /usr/src/app/node_modules/@splunk/otel-web
 RUN chmod -R go+r /usr/src/app/node_modules/@splunk/otel-web-session-recorder
