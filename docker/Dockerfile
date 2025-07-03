@@ -1,4 +1,4 @@
-FROM node:erbium
+FROM node:jod
 
 #MAINTAINER Ivan Font <ifont@redhat.com>
 LABEL org.opencontainers.image.authors="ifont@redhat.com"
