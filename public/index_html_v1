@@ -11,15 +11,15 @@
 <script src="https://cdn.signalfx.com/o11y-gdi-rum/latest/splunk-otel-web-session-recorder.js" crossorigin="anonymous"></script>
 <script>
     SplunkRum.init({
-        realm: "eu2",
-        rumAccessToken: "w3HHQI4cfwb0DWhRacwaug",
+        realm: "us1",
+        rumAccessToken: "BVkKZAnTg2uhT5fiWwG-rg",
         applicationName: "pacman",
-        deploymentEnvironment: "o11y2-pacman-prod"
+        deploymentEnvironment: "o112pacman-prod"
     });
     SplunkSessionRecorder.init({
         app: "pacman",
-        realm: "eu2",
-        rumAccessToken: "w3HHQI4cfwb0DWhRacwaug"
+        realm: "us1",
+        rumAccessToken: "BVkKZAnTg2uhT5fiWwG-rg"
     });
 </script>
 
@@ -29,7 +29,7 @@
         var tracer=Provider.getTracer('AppModuleLoader');
         var span = tracer.startSpan('GameStart', {
         	attributes: { 	'workflow.name' : 'GameStart',
-                         	'userID': 'AlanT'}
+                         	'userID': 'MarinMarinov'}
         	});
     	span.end();
     </script>
@@ -97,7 +97,7 @@
         	attributes: { 	'workflow.name' : 'Highscore',
                          	'error': true,
                          	'error.message': '[Custom Error]: Highscore list is  empty! [MongoError]: Unsupported OP_QUERY command! The client driver may require an upgrade.',
-                         	'userID': 'AlanT'
+                         	'userID': 'MarinMarinov'
         	}
         });
     	span.end();
@@ -160,7 +160,7 @@
     <script>
         var span = tracer.startSpan('DisplayInstructions', {
                 attributes: {   'workflow.name' : 'Instructions',
-                                'userID': 'AlanT'
+                                'userID': 'MarinMarinov'
                 }
         });
         span.end();
@@ -224,7 +224,7 @@
     <script>
         var span = tracer.startSpan('DisplayInfo', {
                 attributes: {   'workflow.name' : 'Info',
-                                'userID': 'AlanT'
+                                'userID': 'MarinMarinov'
                 }
         });
         span.end();
@@ -276,7 +276,7 @@
     		<script>
         		var span = tracer.startSpan('PacmanMovement', {
                 		attributes: {   'workflow.name' : 'MovementButtons',
-                                		'userID': 'AlanT'
+                                		'userID': 'MarinMarinov'
 				}
        			});
 			span.end();
@@ -341,7 +341,7 @@
     <script src="pacman-canvas.js" type="text/javascript">
         var span = tracer.startSpan('CanvasNavigation', {
                 attributes: {   'workflow.name' : 'CanvasNavigation',
-                                'userID': 'AlanT'
+                                'userID': 'MarinMarinov'
                 }
         });
         span.end();
