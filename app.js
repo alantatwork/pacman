@@ -1,24 +1,19 @@
+'use strict';
+
 const opentelemetry = require('@opentelemetry/api');
 const tracer = opentelemetry.trace.getTracer('pacman-tracer');
 
-// Rest of your main module
-
-'use strict';
-
-var express = require('express');
-var path = require('path');
-var Database = require('./lib/database');
-var assert = require('assert');
-
-// Constants
+const express = require('express');
+const path = require('path');
+const Database = require('./lib/database');
 
 // Routes
-var highscores = require('./routes/highscores');
-var user = require('./routes/user');
-var loc = require('./routes/location');
+const highscores = require('./routes/highscores');
+const user = require('./routes/user');
+const loc = require('./routes/location');
 
 // App
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,7 +28,7 @@ app.use('/location', loc);
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
+    const err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
@@ -41,7 +36,7 @@ app.use(function(req, res, next) {
 // Error Handler
 app.use(function(err, req, res, next) {
     if (res.headersSent) {
-        return next(err)
+        return next(err);
     }
     // set locals, only providing error in development
     res.locals.message = err.message;
@@ -52,19 +47,21 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
+// Start OpenTelemetry span before connecting to database
+const span = tracer.startSpan('initConnect', { kind: opentelemetry.SpanKind.CLIENT });
+
 Database.connect(app, function(err) {
-    const span = tracer.startSpan('initConnect',{ 'kind':opentelemetry.SpanKind.CLIENT});
-    span.setAttribute('db.system','mongodb');
-    span.setAttribute('db.name','pacmandb');
+    span.setAttribute('db.system', 'mongodb');
+    span.setAttribute('db.name', 'pacmandb');
     if (err) {
         console.log('Failed to connect to database server');
         span.setAttribute('pacman_custom_message', 'Failed to connect to database server');
-        span.setAttribute('otel.status_code','ERROR');
-        span.setAttribute('error',true);
-        span.setAttribute('sf_error',true);
+        span.setAttribute('otel.status_code', 'ERROR');
+        span.setAttribute('error', true);
+        span.setAttribute('sf_error', true);
     } else {
         console.log('Connected to database server successfully');
-        span.setAttribute('status','success');
+        span.setAttribute('status', 'success');
         span.setAttribute('pacman_custom_message', 'Connected to database server successfully');
     }
     span.end();
